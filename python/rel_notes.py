@@ -4,10 +4,12 @@ import os
 import subprocess
 import json
 import datetime
+from jinja2 import Environment, FileSystemLoader
 
 #a = datetime.strptime(, '%a %b %d %H:%M:%S %Y %z')
 months = {'Jan':1,'Feb':2,'Mar':3,'Apr':4,'May':5,'Jun':6,
 		  'Jul':7,'Aug':8,'Sep':9,'Oct':10,'Nov':11,'Dec':12}
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def days_seconds(t):
 	time,d = t.split(' ')
@@ -101,12 +103,17 @@ class GetLog:
 			for commit in self.commit_list:
 				res[commit.id] = commit.raw
 			f.write(json.dumps(res, indent=2, sort_keys=False) + '\n')
-			
+
+	def make_jinja(self):
+		j2_env = Environment(loader=FileSystemLoader(THIS_DIR),
+							 trim_blocks=True)
+		print(j2_env.get_template('template.html').render(title='Hellow Gist from GutHub'))
 
 com = GetLog(pth='/home/majo/vpp',branch='stable/1701',tag1='17.01.6',tag2='17.01.7')
-print(com.commit_list[0])
-print(com.commit_list[1])
-print(com.fro, com.til)
+com.make_jinja()
+#print(com.commit_list[0])
+#print(com.commit_list[1])
+#print(com.fro, com.til)
 #com.dump()
 #print(com.get_raw_output())
 #days_seconds("1:0:0 25-6-2017")
