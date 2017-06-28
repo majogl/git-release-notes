@@ -1,0 +1,11 @@
+# Release Notes
+{% for data in commit_list %}
+#### Commit ID: {{data.id}}
++ Tag (empty if not present): {{data.tag}}
++ Change ID (empty if not present): {{data.Change_ID}}
++ Merge ID (empty if not present): {{data.Merge}}
++ Author: {{data.Author}}
++ Signed off by: {{data.signed_off_by}}
++ Date: {{data.Date}}
++ Commit Text: {{data.commit_text}}
+{% endfor %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Release notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      .container {
+        max-width: 768px;
+        padding-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+		<h1>Release notes for version {{version}}</h1>
+        <ul>
+        {% for data in commit_list %}
+		<h3>Commit ID: {{data.id}}</h3>
+			<li>Tag (empty if not present): {{data.tag}}</li>
+			<li>Change ID (empty if not present): {{data.Change_ID}}</li>
+			<li>Merge ID (empty if not present): {{data.Merge}}</li>
+			<li>Author: {{data.Author}}</li>
+			<li>Signed off by: {{data.signed_off_by}}</li>
+			<li>Date: {{data.Date}}</li>
+			<li>Commit Text: {{data.commit_text}}</li>
+        {% endfor %}
+		</ul>
+    </div>
+  </body>
+</html>
